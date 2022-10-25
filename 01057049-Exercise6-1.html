@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Function</title>
+    <style type="text/css">
+        li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        ol {
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        img.dice {
+            width: 100px;
+            height: 100px;
+        }
+
+        img.congrats {
+            width: 440px;
+        }
+
+        #msg {
+            font-family: Helvetica, "Microsoft YaHei", "LiHei Pro", TW-Kai;
+            font-size: 120%;
+            color: navy;
+        }
+    </style>
+    
+    <script>
+        var die1Image;
+         var die2Image;
+         var die3Image;
+         var die4Image;
+
+         // register button listener and get the img elements
+         function start()
+         {
+            var button = document.getElementById( "rollButton" );
+            button.addEventListener( "click", rollDice, false );
+
+
+            var button2 = document.getElementById( "cheatButton" );
+            button2.addEventListener( "click",cheating , false );
+
+            var button3 = document.getElementById("cheatButton2");
+            button3.addEventListener("click",cheating2,false);
+            
+            die1Image = document.getElementById( "die1" );
+            die2Image = document.getElementById( "die2" );
+            die3Image = document.getElementById( "die3" );
+            die4Image = document.getElementById( "die4" );
+         } // end function start
+
+         // roll the dice
+         function rollDice()
+         {
+            setImage( die1Image );
+            setImage( die2Image );
+            setImage( die3Image );
+            setImage( die4Image );
+            var a = setImage( die1Image );
+            var b = setImage( die2Image );
+            var c = setImage( die3Image );
+            var d = setImage( die4Image );
+           
+            var poo =document.getElementById("msg");
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            console.log(d);
+
+            if(a!=b && a!=c && a!=d && b!=c && b!=d && c!=d){
+                
+                poo.innerHTML="Oops! Your roll is '無面' !";
+            }
+            else if(a==b && a==c &&a==d &&b==c&&b==d&&c==d) {  
+                poo.innerHTML="Congratulations! Your roll is'一色' ! " + '<br>'+' <img src="congrats.png"> ';
+            }
+            else if((a==b&&a==c&&b==c&&a!=d) || (b==c&&b==d&&c==d&&b!=a) || (a==c&&a==d&&c==d&&a!=b) || (a==b&&a==d&&b==d&&a!=c)) {
+                poo.innerHTML="No dicision, please re-roll the dice!";
+            }
+            else if(a+b+c+d==22&&a>4&&b>4&&c>4&&d>4){
+                poo.innerHTML="Congratulations! Your roll is '十八' " + '<br> '+ ' <img src="congrats.png"> ';
+            }
+            else if(a==b){
+                poo.innerHTML="Your score is " + (c+d) + "!";
+            }
+            else if(a==c){
+                poo.innerHTML="Your score is " + (b+d) + "!";
+            }
+            else if(a==d){
+                poo.innerHTML="Your score is " + (b+c) + "!";
+            }
+            else if(b==c){
+                poo.innerHTML="Your score is " + (a+d) + "!";
+            }
+            else if(b==d){
+                poo.innerHTML="Your score is " + (a+c) + "!";
+            }
+            else if(c==d){
+                poo.innerHTML="Your score is " + (a+b) + "!";
+            }
+            else {
+                poo.innerHTML=" ";
+            }
+           
+          
+         } // end function rollDice
+
+         function cheating(){
+            setImage2( die1Image, die2Image,die3Image,die4Image);
+         }
+
+         function cheating2(){
+            setImage3(die1Image, die2Image,die3Image,die4Image)
+         }
+
+         // set src and alt attributes for a die
+         function setImage( dieImg )
+         {
+            
+            var dieValue = Math.floor( 1 + Math.random() * 6 );
+
+            dieImg.setAttribute( "src", "die" + dieValue + ".jpg" ); //die1~die6.png
+            dieImg.setAttribute( "alt", 
+               "die image with " + dieValue + " spot(s)" );
+            
+            return dieValue;
+            
+
+         } // end function setImage
+
+         function setImage2( dieImg1, dieImg2,dieImg3,dieImg4)
+         {
+            var dieValue = Math.floor( 1 + Math.random() * 6 );
+            dieImg1.setAttribute( "src", "die" + dieValue + ".jpg" ); //die1~die6.png
+            dieImg1.setAttribute( "alt", "die image with " + dieValue + " spot(s)" );
+            dieImg2.setAttribute( "src", "die" + dieValue + ".jpg" ); //die1~die6.png
+            dieImg2.setAttribute( "alt", "die image with " + dieValue + " spot(s)" );
+
+            dieImg3.setAttribute( "src", "die" + dieValue + ".jpg" ); //die1~die6.png
+            dieImg3.setAttribute( "alt", "die image with " + dieValue + " spot(s)" );
+
+            dieImg4.setAttribute( "src", "die" + dieValue + ".jpg" ); //die1~die6.png
+            dieImg4.setAttribute( "alt", "die image with " + dieValue + " spot(s)" );
+
+            var prizing=document.getElementById("msg");
+            prizing.innerHTML= 'congratulation! Your roll is "一色" ! '+"<br>" +' <img src="congrats.png"> ';
+         } // end function setImage
+
+         function setImage3( dieImg1, dieImg2,dieImg3,dieImg4){
+           
+                var whichdie = Math.floor( 1 + Math.random() * 6 );//1-4
+                switch (whichdie){
+                    case 1:
+                        dieImg1.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die5.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        break;
+                    case 2:
+                        dieImg1.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die6.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        break;    
+                    case 3:
+                        dieImg1.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die5.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        break;
+                    case 4:
+                        dieImg1.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die6.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        break;
+                    case 5:
+                        dieImg1.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die6.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        break;    
+                    case 6:
+                        dieImg1.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        dieImg2.setAttribute( "src", "die5.jpg" ); //die1~die6.png
+                        dieImg3.setAttribute( "src", "die5.jpg" ); //die1~die6.png    
+                        dieImg4.setAttribute( "src", "die6.jpg" ); //die1~die6.png
+                        break;    
+                    
+                }
+                
+            var prizing=document.getElementById("msg");
+            prizing.innerHTML= '<br>'+' Congratulation! Your roll is "十八" ! '+"<br>"+ ' <img src="congrats.png"> ';
+
+         }
+
+
+         window.addEventListener( "load", start, false );
+
+    </script>
+</head>
+
+<body>
+    <form action="#">
+        <!--
+            <button type="button" onclick="function" >Count!</button>
+            -->  
+        <input id="rollButton" type="button" value="Roll Dice">
+        <input id="cheatButton" type="button" value="Shortcut">
+        <input id="cheatButton2" type="button" value="Shortcut2">
+    </form>
+    <ol>
+        <li><img id="die1" class="dice" src="blank.jpg" alt="blank image"></li>
+        <li><img id="die2" class="dice" src="blank.jpg" alt="blank image"></li>    
+        <li><img id="die3" class="dice" src="blank.jpg" alt="blank image"></li>
+        <li><img id="die4" class="dice" src="blank.jpg" alt="blank image"></li>
+    </ol>
+    
+    <div id="msg"></div>
+
+</body>
+
+</html>
